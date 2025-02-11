@@ -21,17 +21,27 @@ interface Customer {
 })
 export class CustomerFormComponent implements OnInit {
   currentView: string = "list";
+  userAccess: boolean = true;
   http = inject(HttpClient);
   customerForm!: FormGroup;
   customers: Customer[] = [];
+  userRole: string = 'RELATIONSHIP MANAGER';
   editMode: boolean = false;
   selectedCustomer: Customer | null = null;
   public constructor(private customerService: CustomerService, private router: Router) { }
   ngOnInit(): void {
+    this.editMode=this.checkuserHasEditAccess();
     this.loadCustomers();
     this.initForm();
   }
-
+  checkuserHasEditAccess() {
+    if (localStorage.getItem('Role') == this.userRole) {
+      return this.userAccess=true;
+    }
+    else {
+      return this.userAccess=false;
+    }
+  }
   initForm() {
     this.customerForm = new FormGroup({
       CustomerNumber: new FormControl("", Validators.required),
@@ -114,5 +124,9 @@ export class CustomerFormComponent implements OnInit {
     this.editMode = false;
     this.currentView = 'list';
     this.resetForm();
+  }
+  logout() {
+    localStorage.removeItem('isAuthenticated');
+    this.router.navigate(['/login']);
   }
 } 

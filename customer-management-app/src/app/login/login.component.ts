@@ -34,7 +34,7 @@ export class LoginComponent {
         }
       );
       localStorage.setItem('isAuthenticated', 'true');
-      this.router.navigate(['/add-customer']);
+      this.router.navigate(['/customer']);
     } else {
       alert('Invalid login credentials');
     }

@@ -12,7 +12,7 @@ export const routes: Routes = [
         component:LoginComponent
     },
     {
-        path:'add-customer',
+        path:'customer',
         component:CustomerFormComponent,
       canActivate: [AuthGuard]
     },

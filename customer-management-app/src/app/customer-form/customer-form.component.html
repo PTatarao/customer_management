@@ -1,7 +1,8 @@
+<button type="button" class="btn btn-secondary ms-2" (click)="logout()">Logout</button>
 <div class="container mt-4">
   <div *ngIf="currentView === 'list'">
     <h2>Customer List</h2>
-    <button class="btn btn-primary mb-3" (click)="addCustomer()">Add Customer</button>
+    <button *ngIf="userAccess" class="btn btn-primary mb-3" (click)="addCustomer()">Add Customer</button>
     <table class="table">
       <thead>
         <tr>
@@ -19,8 +20,10 @@
           <td>{{ customer.dob }}</td>
           <td>{{ customer.Gender }}</td>
           <td>
-            <button class="btn btn-sm btn-primary me-2" (click)="editCustomer(customer)">Edit</button>
+            <div *ngIf="userAccess">
+            <button  class="btn btn-sm btn-primary me-2"  (click)="editCustomer(customer)">Edit</button>
             <button class="btn btn-sm btn-danger" (click)="deleteCustomer(customer)">Delete</button>
+              </div>
           </td>
         </tr>
       </tbody>

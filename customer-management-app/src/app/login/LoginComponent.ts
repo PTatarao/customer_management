@@ -16,7 +16,6 @@ import { CustomerContext} from '../customer.context';
 export class LoginComponent {
     username: string = '';
   password: string = '';
-  customerContext: CustomerContext[] = [];
 
     loginForm = new FormGroup({
         username: new FormControl(),
@@ -26,22 +25,21 @@ export class LoginComponent {
   public constructor(private authservice: AuthService, private router: Router) { }
 
   onSubmit() {
+    localStorage.setItem('isAuthenticated', 'false');
     const { username, password } = this.loginForm.value;
     this.authservice.login(username, password).subscribe((userdetail) => {
       console.log(userdetail);
-      if (userdetail) {
-        const user: CustomerContext = {
-          Id: userdetail.Id,
-          Name: userdetail.Name,
-          Role: userdetail.Role
-        };
-        this.customerContext.push(user);
+    
         localStorage.setItem('isAuthenticated', 'true');
-        this.router.navigate(['/add-customer']);
-      }
+      localStorage.setItem('Role', userdetail.role)
+        this.router.navigate(['/customer']);
 
     },
-    (error: any) => {
+      (error: any) => {
+        localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('Role');
+
+
       console.error("Invalid user:", error);
     })
         
