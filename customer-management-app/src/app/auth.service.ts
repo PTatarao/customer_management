@@ -17,6 +17,10 @@ export class AuthService {
     const loginDetails = { UserName: username, Password: password };
     return this.http.post<any>(this.apiUrl, loginDetails);
   }
+  getUserDetails(id: String): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+
+  }
   logout(id: number): Observable<CustomerContext> {
     return this.http.get<CustomerContext>(`${this.apiUrl}/${id}`);
   }
