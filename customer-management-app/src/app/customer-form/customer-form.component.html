@@ -1,0 +1,75 @@
+<div class="container mt-4">
+  <div *ngIf="currentView === 'list'">
+    <h2>Customer List</h2>
+    <button class="btn btn-primary mb-3" (click)="addCustomer()">Add Customer</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Customer Number</th>
+          <th>Customer Name</th>
+          <th>Date of Birth</th>
+          <th>Gender</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers">
+          <td>{{ customer.CustomerNumber }}</td>
+          <td>{{ customer.CustomerName }}</td>
+          <td>{{ customer.dob }}</td>
+          <td>{{ customer.Gender }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary me-2" (click)="editCustomer(customer)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteCustomer(customer)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="currentView === 'form'">
+    <h2>{{ editMode ? 'Edit Customer' : 'Add Customer' }}</h2>
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="CustomerNumber" class="form-label">Customer Number</label>
+        <input type="text" id="CustomerNumber" class="form-control" formControlName="CustomerNumber">
+        <div *ngIf="customerForm.get('CustomerNumber')?.invalid && customerForm.get('CustomerNumber')?.touched" class="text-danger">
+          Customer Number is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="CustomerName" class="form-label">Customer Name</label>
+        <input type="text" id="CustomerName" class="form-control" formControlName="CustomerName">
+        <div *ngIf="customerForm.get('CustomerName')?.invalid && customerForm.get('CustomerName')?.touched" class="text-danger">
+          Customer Name is required (min. 3 characters).
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="dob" class="form-label">Date of Birth</label>
+        <input type="date" id="dob" class="form-control" formControlName="dob">
+        <div *ngIf="customerForm.get('dob')?.invalid && customerForm.get('dob')?.touched" class="text-danger">
+          Date of Birth is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Gender" class="form-label">Gender</label>
+        <select id="Gender" class="form-select" formControlName="Gender">
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <div *ngIf="customerForm.get('Gender')?.invalid && customerForm.get('Gender')?.touched" class="text-danger">
+          Gender is required.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="customerForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="cancelEdit()">Cancel</button>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <!--<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="username">Username</label>
+      <input type="text" id="username" class="form-control" formControlName="username" required>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" class="form-control" formControlName="password" required>
+    </div>
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  </form>-->
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="username" class="form-label">username</label>
+      <input type="text" id="username" class="form-control" formControlName="username">
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">password</label>
+      <input type="password" id="password" class="form-control" formControlName="password">
+   
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Save</button>
+
+  </form>
+</div>
+  
