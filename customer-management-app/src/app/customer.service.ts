@@ -27,7 +27,7 @@ export class CustomerService {
   }
 
   addCustomer(customer: Customer): Observable<any> {
-    const customer1 = { CustomerName: customer.CustomerName, Gender: customer.Gender, dob: customer.dob};
+    const customer1 = { CustomerName: customer.CustomerName, Gender: customer.Gender, dob: customer.dob };
     return this.http.post<any>(this.apiUrl, customer1);
   }
 

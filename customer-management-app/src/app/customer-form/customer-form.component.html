@@ -34,14 +34,6 @@
     <h2>{{ editMode ? 'Edit Customer' : 'Add Customer' }}</h2>
     <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label for="CustomerNumber" class="form-label">Customer Number</label>
-        <input type="text" id="CustomerNumber" class="form-control" formControlName="CustomerNumber">
-        <div *ngIf="customerForm.get('CustomerNumber')?.invalid && customerForm.get('CustomerNumber')?.touched" class="text-danger">
-          Customer Number is required.
-        </div>
-      </div>
-
-      <div class="mb-3">
         <label for="CustomerName" class="form-label">Customer Name</label>
         <input type="text" id="CustomerName" class="form-control" formControlName="CustomerName">
         <div *ngIf="customerForm.get('CustomerName')?.invalid && customerForm.get('CustomerName')?.touched" class="text-danger">

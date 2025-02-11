@@ -44,7 +44,6 @@ export class CustomerFormComponent implements OnInit {
   }
   initForm() {
     this.customerForm = new FormGroup({
-      CustomerNumber: new FormControl("", Validators.required),
       CustomerName: new FormControl("", [Validators.required, Validators.minLength(3)]),
       dob: new FormControl("", Validators.required),
       Gender: new FormControl("", Validators.required),
